@@ -14,9 +14,9 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
     private val _resultList = MutableLiveData<Response<ItunesResult>>()
     val resultList: LiveData<Response<ItunesResult>> = _resultList
 
-    fun getAll(entityName:String, attributeName:String,searchText:String,offsetLimit:String){
+    fun getAll(mediaName:String,searchText:String,offsetLimit:String){
         viewModelScope.launch{
-            val response = repository.getAll(entityName, attributeName, searchText, offsetLimit)
+            val response = repository.getAll(mediaName, searchText, offsetLimit)
             _resultList.value=response
         }
     }

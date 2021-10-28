@@ -49,13 +49,15 @@ class SearchFragment : Fragment() {
         binding.searchBar.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-
+                if (p0?.length!! >=2) {
+                    searchPageVM.getAll("music", p0!!, "0")
+                }
                 return false
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0?.length!! >=2) {
-                    searchPageVM.getAll("song", "", p0!!, "20")
+                    searchPageVM.getAll("music", p0!!.replace(' ','+'), "0")
                 }
                 return false
             }

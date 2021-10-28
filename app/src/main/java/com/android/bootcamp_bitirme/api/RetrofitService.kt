@@ -9,8 +9,7 @@ import retrofit2.http.Query
 
 interface RetrofitService {
     @GET("search?&limit=20")
-    suspend fun getAll(@Query("entity")entityName:String
-               ,@Query("attribute")attributeName:String
+    suspend fun getAll(@Query("media")mediaName:String
                ,@Query("term")searchText:String
                ,@Query("offset") offsetLimit:String
     ): Response<ItunesResult>
