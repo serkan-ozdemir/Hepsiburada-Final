@@ -1,10 +1,8 @@
 package com.android.bootcamp_bitirme.api
 
 import com.android.bootcamp_bitirme.models.ItunesResult
-import com.android.bootcamp_bitirme.models.MusicData
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitService {

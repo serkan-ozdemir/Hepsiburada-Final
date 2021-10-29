@@ -1,18 +1,18 @@
 package com.android.bootcamp_bitirme.views
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.android.bootcamp_bitirme.R
 import com.android.bootcamp_bitirme.viewModels.SearchViewModel
 import com.android.bootcamp_bitirme.databinding.FragmentSearchBinding
-import com.android.bootcamp_bitirme.models.ItunesResult
 import com.android.bootcamp_bitirme.models.repository.Repository
+
+
 //TODO result types & name change rv_item
 class SearchFragment : Fragment() {
     private lateinit var searchPageVM: SearchViewModel
@@ -23,6 +23,9 @@ class SearchFragment : Fragment() {
     }
     private val searchAdapter = SearchRVAdapter()
     private val repository = Repository()
+    private var searchText = ""
+    private var offsetCount= 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,9 +33,6 @@ class SearchFragment : Fragment() {
     ): View {
         searchPageVM = SearchViewModel(repository)
         setupRecyclerView()
-
-        binding.viewM = searchPageVM
-        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -41,23 +41,47 @@ class SearchFragment : Fragment() {
 
         searchPageVM.resultList.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
-                searchAdapter.setData(it.body()!!.results)
+                searchAdapter.setData(it.body()!!.results.toMutableList(),offsetCount)
             } else {
                 Log.d("Observe", "Error")
             }
         })
+        searchBarInitializer()
+        radioGroupInitializer()
+    }
+
+    private fun setupRecyclerView() {
+        binding.searchRV.adapter = searchAdapter
+        binding.searchRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)) {
+                    offsetCount = binding.searchRV.adapter?.itemCount!!
+                    searchPageVM.getAll(selectedButton(), searchText, offsetCount.toString() )
+                }
+            }
+        })
+    }
+
+    private fun searchBarInitializer() {
         binding.searchBar.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                if (p0?.length!! >=2) {
-                    searchPageVM.getAll("music", p0!!, "0")
+                if (p0?.length!! >= 2) {
+                    offsetCount = 0
+                    searchPageVM.getAll(selectedButton(), p0, offsetCount.toString())
                 }
                 return false
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0?.length!! >=2) {
-                    searchPageVM.getAll("music", p0!!.replace(' ','+'), "0")
+                searchText = if (p0?.length!! >= 2) {
+                    offsetCount = 0
+                    searchPageVM.getAll(selectedButton(), p0, offsetCount.toString())
+                    p0
+                } else {
+                    searchAdapter.setData(mutableListOf(),0)
+                    ""
                 }
                 return false
             }
@@ -65,10 +89,21 @@ class SearchFragment : Fragment() {
 
     }
 
-    fun setupRecyclerView() {
-        binding.searchDataRV.adapter = searchAdapter.also { it.setHasStableIds(true) }
-        binding.searchDataRV.setHasFixedSize(true)
-        binding.searchDataRV.isNestedScrollingEnabled = false
+    private fun radioGroupInitializer() {
+        binding.categoryButtonGroup.setOnCheckedChangeListener { group, checkId ->
+            offsetCount = 0
+            searchPageVM.getAll(selectedButton(), searchText, offsetCount.toString())
+        }
+    }
+
+    fun selectedButton(): String {
+        when (binding.categoryButtonGroup.checkedRadioButtonId) {
+            R.id.category_movie -> return "movie"
+            R.id.category_music -> return "music"
+            R.id.category_apps -> return "software"
+            R.id.category_books -> return "ebook"
+        }
+        return ""
     }
 
 }
