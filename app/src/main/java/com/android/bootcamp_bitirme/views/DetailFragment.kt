@@ -36,17 +36,5 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    companion object {
-        @BindingAdapter("loadImage")
-        @JvmStatic
-        fun ImageView.loadImage(url: String?) {
-            if (!url.isNullOrEmpty()) {
-                Glide.with(this.context)
-                    .asBitmap()
-                    .fitCenter()
-                    .load(url)
-                    .into(this)
-            }
-        }
-    }
+
 }

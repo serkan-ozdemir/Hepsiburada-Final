@@ -1,6 +1,7 @@
 package com.android.bootcamp_bitirme.views
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,40 +12,35 @@ import com.android.bootcamp_bitirme.databinding.ItemSearchResultBinding
 import com.android.bootcamp_bitirme.models.ItemData
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_search_result.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class SearchRVAdapter() : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>() {
-    private lateinit var binding: ItemSearchResultBinding
+
     private var result: MutableList<ItemData> = mutableListOf<ItemData>()
 
-    inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class SearchViewHolder(private val binding: ItemSearchResultBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(item: ItemData) {
+            binding.item = item
+            binding.executePendingBindings()
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_search_result, parent, false)
-        binding = ItemSearchResultBinding.bind(view.rootView)
-        val viewHolder = SearchViewHolder(view)
+        val view = LayoutInflater.from(parent.context)
+        val binding = ItemSearchResultBinding.inflate(view)
+        val viewHolder = SearchViewHolder(binding)
 
         itemClick(viewHolder)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.itemView.collectionName.text = result[position].collectionName
-        holder.itemView.collectionPrice.text =
-            if (result[position].collectionPrice > 0) result[position].collectionPrice.toString() else "Free"
-        holder.itemView.releaseDate.text = SimpleDateFormat(
-            "dd.MM.yyyy",
-            Locale("us")
-        ).format(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(result[position].releaseDate))
-
-        Glide.with(binding.itemImage)
-            .asBitmap()
-            .fitCenter()
-            .load(result[position].artworkUrl100)
-            .into(holder.itemView.itemImage)
+        holder.bind(result[position])
     }
 
     private fun itemClick(holder: SearchViewHolder) {
@@ -67,10 +63,13 @@ class SearchRVAdapter() : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>
     fun setData(result: MutableList<ItemData>, offsetCount: Int) {
         if (offsetCount > 0) {
             this.result.addAll(result)
+            this.notifyItemRangeChanged(itemCount-offsetCount,offsetCount)
         } else {
-            this.result = result
+            this.result.clear()
+            this.result.addAll(result)
+            this.notifyDataSetChanged()
         }
-        notifyDataSetChanged()
+
     }
 
 }

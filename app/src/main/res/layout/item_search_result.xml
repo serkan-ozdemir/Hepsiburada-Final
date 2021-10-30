@@ -1,88 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_140sdp"
-    android:background="#F1F1F1">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_40sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:cardElevation="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
+        <variable
+            name="item"
+            type="com.android.bootcamp_bitirme.models.ItemData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:background="#F1F1F1">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:loadImage="@{item.artworkUrl100}"
+                android:scaleType="fitXY" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/collectionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:text="@{item.collectionName}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toTopOf="@+id/cardView"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Collection Name" />
+
+        <TextView
+            android:id="@+id/artist_publisher_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/lato_regular"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:text="@{item.artistName}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="@id/collectionName"
+            app:layout_constraintTop_toBottomOf="@+id/collectionName"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/textReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:paddingStart="@dimen/_10sdp"
+            android:text="@string/released"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintLeft_toRightOf="@id/cardView"
+            app:layout_constraintTop_toTopOf="@id/cardView"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/releaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/lato_regular"
+            android:paddingStart="@dimen/_10sdp"
+            app:dateFormat="@{item.releaseDate}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="@id/textReleaseDate"
+            app:layout_constraintTop_toBottomOf="@+id/textReleaseDate"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/collectionPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:paddingLeft="@dimen/_10sdp"
+            app:priceToString="@{item.collectionPrice}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView"
+            app:layout_constraintLeft_toRightOf="@id/cardView"
+            tools:ignore="RtlSymmetry" />
+
 
         <ImageView
-            android:id="@+id/itemImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY" />
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/collectionName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_regular"
-        android:maxLines="2"
-        android:paddingLeft="@dimen/_15sdp"
-        android:paddingRight="@dimen/_15sdp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Collection Name" />
-
-    <TextView
-        android:id="@+id/textReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_regular"
-        android:paddingStart="@dimen/_10sdp"
-        android:text="@string/released"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_10sdp"
-        app:layout_constraintLeft_toRightOf="@id/cardView"
-        app:layout_constraintTop_toTopOf="@+id/cardView"
-        tools:ignore="RtlSymmetry" />
-
-    <TextView
-        android:id="@+id/releaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:fontFamily="@font/lato_regular"
-        android:paddingStart="@dimen/_10sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_10sdp"
-        app:layout_constraintLeft_toLeftOf="@id/textReleaseDate"
-        app:layout_constraintTop_toBottomOf="@+id/textReleaseDate"
-        tools:ignore="RtlSymmetry" />
-
-    <TextView
-        android:id="@+id/collectionPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lato_regular"
-        android:paddingLeft="@dimen/_10sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintLeft_toRightOf="@id/cardView"
-        tools:ignore="RtlSymmetry" />
-
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DFDFDF"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="1dp"
+            android:background="#DFDFDF"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/collectionPrice"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

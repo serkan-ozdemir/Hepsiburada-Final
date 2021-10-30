@@ -11,6 +11,7 @@ import com.android.bootcamp_bitirme.R
 import com.android.bootcamp_bitirme.viewModels.SearchViewModel
 import com.android.bootcamp_bitirme.databinding.FragmentSearchBinding
 import com.android.bootcamp_bitirme.models.repository.Repository
+import kotlinx.coroutines.*
 
 
 //TODO result types & name change rv_item
@@ -24,7 +25,7 @@ class SearchFragment : Fragment() {
     private val searchAdapter = SearchRVAdapter()
     private val repository = Repository()
     private var searchText = ""
-    private var offsetCount= 0
+    private var offsetCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,18 +33,18 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         searchPageVM = SearchViewModel(repository)
+
         setupRecyclerView()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         searchPageVM.resultList.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
-                searchAdapter.setData(it.body()!!.results.toMutableList(),offsetCount)
+                searchAdapter.setData(it.body()!!.results.toMutableList(), offsetCount)
             } else {
-                Log.d("Observe", "Error")
+                Log.d("Retrofit", "Error ${it.errorBody()}")
             }
         })
         searchBarInitializer()
@@ -57,7 +58,7 @@ class SearchFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
                     offsetCount = binding.searchRV.adapter?.itemCount!!
-                    searchPageVM.getAll(selectedButton(), searchText, offsetCount.toString() )
+                    searchPageVM.getAll(selectedButton(), searchText, offsetCount.toString())
                 }
             }
         })
@@ -80,7 +81,7 @@ class SearchFragment : Fragment() {
                     searchPageVM.getAll(selectedButton(), p0, offsetCount.toString())
                     p0
                 } else {
-                    searchAdapter.setData(mutableListOf(),0)
+                    searchAdapter.setData(mutableListOf(), 0)
                     ""
                 }
                 return false
