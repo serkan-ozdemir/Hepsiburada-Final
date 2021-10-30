@@ -10,7 +10,7 @@ data class ItunesResult(
 
 ):Serializable
 data class ItemData(
-	//Used
+	//Used values
 	val kind : String,
 	@SerializedName(value="collectionName", alternate = ["trackName"])
 	val collectionName : String,
@@ -21,25 +21,19 @@ data class ItemData(
 	val releaseDate : String,
 	val collectionCensoredName : String,
 	val trackCensoredName : String,
-	val artistViewUrl : String,
-	val collectionViewUrl : String,
-	val trackViewUrl : String,
-	val previewUrl : String,
 	val trackTimeMillis : Long,
 	val country : String,
 	val currency : String,
 	val primaryGenreName : String,
-
-	//software
 	val screenshotUrls : List<String>,
 	val fileSizeBytes : Long,
 	val minimumOsVersion : String,
 	@SerializedName("description",alternate = ["longDescription"])
 	val description : String,
 	val version : String,
-	val averageUserRating : Double,
-	val userRatingCount : Int
-
+	val averageUserRating : Float,
+	val userRatingCount : Int,
+	val currentVersionReleaseDate : String
 
 ):Serializable
 	data class MusicData(
@@ -108,7 +102,6 @@ data class ItemData(
 		val sellerName : String,
 		val primaryGenreName : String,
 		val genreIds : List<Int>,
-		val isVppDeviceBasedLicensingEnabled : Boolean,
 		val currentVersionReleaseDate : String,
 		val releaseNotes : String,
 		val primaryGenreId : Int,

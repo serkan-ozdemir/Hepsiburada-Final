@@ -1,4 +1,4 @@
-package com.android.bootcamp_bitirme.viewModels
+package com.android.bootcamp_bitirme.ui.home
 
 import com.android.bootcamp_bitirme.models.ItunesResult
 import androidx.lifecycle.LiveData
@@ -12,7 +12,7 @@ import retrofit2.Response
 class SearchViewModel(private val repository: Repository) : ViewModel() {
     private val _resultList = MutableLiveData<Response<ItunesResult>>()
     val resultList: LiveData<Response<ItunesResult>> = _resultList
-
+    //get data
     fun getAll(mediaName:String,searchText:String,offsetLimit:String){
         viewModelScope.launch{
             val response = repository.getAll(mediaName, searchText, offsetLimit)

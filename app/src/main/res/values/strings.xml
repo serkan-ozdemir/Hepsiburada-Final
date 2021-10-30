@@ -5,4 +5,9 @@
     <string name="category_apps">Apps</string>
     <string name="category_music">Music</string>
     <string name="category_movie">Movie</string>
+    <string name="genre">Genre:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="price">Price:</string>
+    <string name="app_detail">App Detail</string>
+    <string name="book_detail">Book Detail</string>
 </resources>

@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
-        android:background="#F1F1F1">
+        android:background="@color/pageColor">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -30,8 +30,9 @@
                 android:id="@+id/itemImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/image_background"
                 app:loadImage="@{item.artworkUrl100}"
-                android:scaleType="fitXY" />
+                 />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -111,7 +112,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#DFDFDF"
+            android:background="@color/itemLine"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/collectionPrice"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

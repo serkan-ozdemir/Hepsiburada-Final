@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pageColor">#F1F1F1</color>
+    <color name="pageColor2">#FAFAFA</color>
+    <color name="strokeColor">#979797</color>
+    <color name="selected">#F7F7F7</color>
+    <color name="regular">#E3E3E3</color>
+    <color name="itemLine">#DFDFDF</color>
+    <color name="image_background">#000</color>
+    <color name="textColor">#000</color>
 </resources>

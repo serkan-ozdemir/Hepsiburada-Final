@@ -1,17 +1,16 @@
-package com.android.bootcamp_bitirme.views
+package com.android.bootcamp_bitirme.ui.home
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.android.bootcamp_bitirme.R
-import com.android.bootcamp_bitirme.viewModels.SearchViewModel
 import com.android.bootcamp_bitirme.databinding.FragmentSearchBinding
 import com.android.bootcamp_bitirme.models.repository.Repository
-import kotlinx.coroutines.*
 
 
 //TODO result types & name change rv_item
@@ -33,24 +32,28 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         searchPageVM = SearchViewModel(repository)
-
         setupRecyclerView()
         return binding.root
     }
-
+    //Initialize listeners and observe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observe(view)
+        searchBarInitializer()
+        radioGroupInitializer()
+    }
+    //live data observe and change adapter's data
+    private fun observe(view:View){
         searchPageVM.resultList.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
                 searchAdapter.setData(it.body()!!.results.toMutableList(), offsetCount)
             } else {
                 Log.d("Retrofit", "Error ${it.errorBody()}")
+                Toast.makeText(view.context,"${it.errorBody()}",Toast.LENGTH_SHORT).show()
             }
         })
-        searchBarInitializer()
-        radioGroupInitializer()
     }
-
+    //Pagination with scrolling
     private fun setupRecyclerView() {
         binding.searchRV.adapter = searchAdapter
         binding.searchRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -63,7 +66,7 @@ class SearchFragment : Fragment() {
             }
         })
     }
-
+    //search bar
     private fun searchBarInitializer() {
         binding.searchBar.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -74,7 +77,6 @@ class SearchFragment : Fragment() {
                 }
                 return false
             }
-
             override fun onQueryTextChange(p0: String?): Boolean {
                 searchText = if (p0?.length!! >= 2) {
                     offsetCount = 0
@@ -87,16 +89,15 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
-
     }
-
+    //changing category get new data
     private fun radioGroupInitializer() {
         binding.categoryButtonGroup.setOnCheckedChangeListener { group, checkId ->
             offsetCount = 0
             searchPageVM.getAll(selectedButton(), searchText, offsetCount.toString())
         }
     }
-
+    //set category name
     fun selectedButton(): String {
         when (binding.categoryButtonGroup.checkedRadioButtonId) {
             R.id.category_movie -> return "movie"
@@ -106,5 +107,4 @@ class SearchFragment : Fragment() {
         }
         return ""
     }
-
 }
