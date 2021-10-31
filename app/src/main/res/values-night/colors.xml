@@ -6,6 +6,6 @@
     <color name="selected">#888888</color>
     <color name="regular">#505050</color>
     <color name="itemLine">#454545</color>
-    <color name="image_background">#A0ABC3</color>
+    <color name="image_background">#000</color>
     <color name="textColor">#D3D3D3</color>
 </resources>

@@ -13,6 +13,6 @@
     <color name="selected">#F7F7F7</color>
     <color name="regular">#E3E3E3</color>
     <color name="itemLine">#DFDFDF</color>
-    <color name="image_background">#000</color>
+    <color name="image_background">#CFCFCF</color>
     <color name="textColor">#000</color>
 </resources>

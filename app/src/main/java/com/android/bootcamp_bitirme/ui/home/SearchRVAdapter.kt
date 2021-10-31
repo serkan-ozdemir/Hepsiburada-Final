@@ -69,5 +69,4 @@ class SearchRVAdapter : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>()
             this.notifyDataSetChanged()
         }
     }
-
 }

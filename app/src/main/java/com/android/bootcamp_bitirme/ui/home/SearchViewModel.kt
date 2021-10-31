@@ -19,5 +19,4 @@ class SearchViewModel(private val repository: Repository) : ViewModel() {
             _resultList.value=response
         }
     }
-
 }

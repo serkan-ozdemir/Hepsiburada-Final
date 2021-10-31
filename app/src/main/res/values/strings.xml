@@ -11,4 +11,6 @@
     <string name="app_detail">App Detail</string>
     <string name="book_detail">Book Detail</string>
     <string name="duration">Duration:</string>
+    <string name="run_time">Run Time:</string>
+    <string name="movie_detail">Movie Detail</string>
 </resources>
