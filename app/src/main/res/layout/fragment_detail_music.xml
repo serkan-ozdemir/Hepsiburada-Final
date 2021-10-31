@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
@@ -21,7 +22,7 @@
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:text="@{item.collectionName}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_20sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/imageCard"
@@ -35,7 +36,7 @@
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:text="@{item.artistName}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/imageCard"
@@ -55,13 +56,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
-            android:paddingRight="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_25sdp"
             android:text="@string/release_date"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/imageCard"
-            app:layout_constraintTop_toBottomOf="@id/line" />
+            app:layout_constraintTop_toBottomOf="@id/line"
+            tools:ignore="RtlSymmetry" />
         <TextView
             android:id="@+id/releaseDate"
             android:layout_width="0dp"
@@ -69,7 +71,7 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             app:dateFormat="@{item.releaseDate}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textReleaseDate"
@@ -81,12 +83,13 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:layout_marginTop="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
-            android:text="Duration: "
-            android:textColor="@color/black"
+            android:paddingEnd="@dimen/_15sdp"
+            android:text="@string/duration"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/textReleaseDate"
-            app:layout_constraintTop_toBottomOf="@id/textReleaseDate" />
+            app:layout_constraintTop_toBottomOf="@id/textReleaseDate"
+            tools:ignore="RtlSymmetry" />
         <TextView
             android:id="@+id/duration"
             android:layout_width="0dp"
@@ -94,7 +97,7 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             app:formatTime="@{item.trackTimeMillis}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textDuration"
@@ -106,12 +109,13 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:layout_marginTop="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
             android:text="@string/genre"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/textDuration"
-            app:layout_constraintTop_toBottomOf="@id/textDuration" />
+            app:layout_constraintTop_toBottomOf="@id/textDuration"
+            tools:ignore="RtlSymmetry" />
         <TextView
             android:id="@+id/genre"
             android:layout_width="0dp"
@@ -119,7 +123,7 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             android:text="@{item.primaryGenreName}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textGenre"
@@ -131,12 +135,13 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:layout_marginTop="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
             android:text="@string/price"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/textGenre"
-            app:layout_constraintTop_toBottomOf="@id/textGenre" />
+            app:layout_constraintTop_toBottomOf="@id/textGenre"
+            tools:ignore="RtlSymmetry" />
         <TextView
             android:id="@+id/collectionPrice"
             android:layout_width="0dp"
@@ -144,12 +149,11 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             app:priceToString="@{item.collectionPrice}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textPrice"
             app:layout_constraintTop_toTopOf="@id/textPrice" />
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/imageCard"
@@ -167,6 +171,7 @@
                 android:layout_height="@dimen/_100sdp"
                 android:background="@color/image_background"
                 app:loadImage="@{item.artworkUrl100}"
+                android:transitionName="itemImage"
                 />
 
         </androidx.cardview.widget.CardView>

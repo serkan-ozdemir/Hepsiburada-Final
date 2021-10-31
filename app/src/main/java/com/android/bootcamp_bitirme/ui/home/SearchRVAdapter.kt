@@ -7,11 +7,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.android.bootcamp_bitirme.databinding.ItemSearchResultBinding
 import com.android.bootcamp_bitirme.models.ItemData
+import kotlinx.coroutines.GlobalScope
 
 
-class SearchRVAdapter() : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>() {
+class SearchRVAdapter : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>() {
 
-    private var result: MutableList<ItemData> = mutableListOf<ItemData>()
+    private var result: MutableList<ItemData> = mutableListOf()
 
     inner class SearchViewHolder(private val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -25,7 +26,6 @@ class SearchRVAdapter() : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>
         val view = LayoutInflater.from(parent.context)
         val binding = ItemSearchResultBinding.inflate(view)
         val viewHolder = SearchViewHolder(binding)
-
         itemClick(viewHolder, binding)
         return viewHolder
     }
@@ -42,6 +42,7 @@ class SearchRVAdapter() : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>
                 "ebook" -> it.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToBookDetailFragment(result[holder.layoutPosition]))
                 "software" -> it.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToAppDetailFragment(result[holder.layoutPosition]))
             }
+
         }
     }
 
@@ -67,7 +68,6 @@ class SearchRVAdapter() : RecyclerView.Adapter<SearchRVAdapter.SearchViewHolder>
             this.result.addAll(result)
             this.notifyDataSetChanged()
         }
-
     }
 
 }

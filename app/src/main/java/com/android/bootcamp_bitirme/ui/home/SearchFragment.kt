@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.bootcamp_bitirme.R
 import com.android.bootcamp_bitirme.databinding.FragmentSearchBinding
 import com.android.bootcamp_bitirme.models.repository.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-//TODO result types & name change rv_item
 class SearchFragment : Fragment() {
     private lateinit var searchPageVM: SearchViewModel
     private val binding: FragmentSearchBinding by lazy {
@@ -92,7 +94,7 @@ class SearchFragment : Fragment() {
     }
     //changing category get new data
     private fun radioGroupInitializer() {
-        binding.categoryButtonGroup.setOnCheckedChangeListener { group, checkId ->
+        binding.categoryButtonGroup.setOnCheckedChangeListener { _, _ ->
             offsetCount = 0
             searchPageVM.getAll(selectedButton(), searchText, offsetCount.toString())
         }

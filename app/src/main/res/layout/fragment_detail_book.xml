@@ -21,7 +21,7 @@
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:text="@{item.collectionName}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_20sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/imageCard"
@@ -35,7 +35,7 @@
             android:paddingLeft="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:text="@{item.artistName}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/imageCard"
@@ -58,7 +58,7 @@
             android:paddingRight="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/release_date"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/imageCard"
             app:layout_constraintTop_toBottomOf="@id/line" />
@@ -69,7 +69,7 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             app:dateFormat="@{item.releaseDate}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textReleaseDate"
@@ -83,7 +83,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:paddingRight="@dimen/_15sdp"
             android:text="@string/price"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/textReleaseDate"
             app:layout_constraintTop_toBottomOf="@id/releaseDate" />
@@ -94,7 +94,7 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             app:priceToString="@{item.collectionPrice}"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toRightOf="@id/textPrice"
@@ -106,7 +106,7 @@
             android:fontFamily="@font/lato_regular"
             android:layout_marginEnd="@dimen/_15sdp"
             android:text="@string/book_detail"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintLeft_toLeftOf="@id/textPrice"
             app:layout_constraintBottom_toTopOf="@id/line2" />
@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_margin="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line2">
 
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_regular"
                 app:cleanHtml="@{item.description}"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="@dimen/_14sdp" />
         </androidx.core.widget.NestedScrollView>
 
@@ -156,6 +156,7 @@
                 android:layout_height="@dimen/_100sdp"
                 android:background="@color/image_background"
                 app:loadImage="@{item.artworkUrl100}"
+                android:transitionName="itemImage"
                 />
 
         </androidx.cardview.widget.CardView>
